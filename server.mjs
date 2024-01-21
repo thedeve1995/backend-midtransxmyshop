@@ -1,4 +1,5 @@
-// server.mjs
+// server.mjs 
+// run node --experimental-modules server.mjs in terminal for test by Dani Sepriyanto
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors'; // Import middleware CORS
