@@ -31,7 +31,6 @@ app.post('/getTransactionToken', (req, res) => {
     snap.createTransaction(parameter)
         .then((transaction) => {
             const transactionToken = transaction.token;
-            console.log('transactionToken:', transactionToken);
             res.json({ transactionToken });
         })
         .catch((error) => {
@@ -40,6 +39,21 @@ app.post('/getTransactionToken', (req, res) => {
         });
 });
 
+app.get('/getOrderStatus/:order_id', async (req, res) => {
+    const orderId = req.params.order_id;
+
+    try {
+        const transactionStatus = await snap.transaction.status(orderId);
+        res.json({ transactionStatus });
+    } catch (error) {
+        console.error('Error getting transaction status:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
+
+
